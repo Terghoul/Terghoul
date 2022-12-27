@@ -1,0 +1,58 @@
+- 👋 Hi, I’m @Terghoul
+- 👀 I’m interested in ...
+- 🌱 I’m currently learning ...
+- 💞️ I’m looking to collaborate on ...
+- 📫 How to reach me ...
+
+<!---
+Terghoul/Terghoul is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+You can click the Preview link to take a look at your changes.
+--->
+import pygame
+import random
+
+# Initialisiere Pygame und setze die Fenstergröße
+pygame.init()
+screen = pygame.display.set_mode((400, 300))
+
+# Setze den Titel des Fensters
+pygame.display.set_caption("Endlos-Runner")
+
+# Erstelle einen Spieler und eine Hintergrundfarbe
+player = pygame.Rect(100, 100, 50, 50)
+background_color = (0, 0, 0)
+
+# Erstelle eine Liste von Plattformen
+platforms = []
+for i in range(5):
+    platforms.append(pygame.Rect(random.randint(0, 350), random.randint(0, 250), 50, 10))
+
+# Setze die Geschwindigkeit des Spielers
+player_speed = 5
+
+# Schleife, bis das Spiel beendet wird
+running = True
+while running:
+    # Überprüfe die Ereignisse des Spiels
+    for event in pygame.event.get():
+        # Beende das Spiel, wenn das Fenster geschlossen wird
+        if event.type == pygame.QUIT:
+            running = False
+    
+    # Bewege den Spieler nach rechts
+    player.x += player_speed
+    
+    # Wenn der Spieler das rechte Ende des Fensters erreicht, setze ihn wieder auf den Anfang
+    if player.x > 350:
+        player.x = 0
+    
+    # Aktualisiere das Fenster
+    screen.fill(background_color)
+    for platform in platforms:
+        pygame.draw.rect(screen, (255, 255, 255), platform)
+    pygame.draw.rect(screen, (255, 0, 0), player)
+    pygame.display.flip()
+
+# Beende Pygame, wenn das Spiel beendet ist
+pygame.quit()
+
